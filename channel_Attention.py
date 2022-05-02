@@ -55,3 +55,10 @@ def channel_attention(inputx, neurons_2, n, ratio=8):
     channel_attention_feature = attention_layer2(channel_attention_feature, inputx)
     channel_attention = TimeDistributed(Dense(neurons_2, activation='elu', kernel_initializer='he_normal', use_bias=True, bias_initializer='zeros'))(channel_attention_feature)
     return channel_attention
+
+  
+  
+  
+  
+  
+  
