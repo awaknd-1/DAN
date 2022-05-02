@@ -41,9 +41,3 @@ def spatial_attention(inputx, channel_attention, neurons_1, spatial_axis, time_p
 
 
 
-
-
-
-
-
-
