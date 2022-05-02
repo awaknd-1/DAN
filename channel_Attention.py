@@ -28,7 +28,7 @@ def attention_layer2(out, inputx):
 
 
 # define channel attention
-def channel_attention(inputx, neurons_2, n, ratio=8):
+def C_attention(inputx, n, ratio=8):
     channel_axis = -1
     time_points = inputx.shape[1]
     # get channel
@@ -55,9 +55,9 @@ def channel_attention(inputx, neurons_2, n, ratio=8):
     # add the two features set created using max and avg pooling
     channel_attention_feature = Add()([mlp_avg_pool, mlp_max_pool])
     # apply multi-head attention to the channel information
+    #channel_attention_feature = multi_head_attention(inputx, channel_attention_feature, 2, "Channel")
     channel_attention_feature = attention_layer2(channel_attention_feature, inputx)
-    channel_attention = TimeDistributed(Dense(neurons_2, activation='elu', kernel_initializer='he_normal', use_bias=True, bias_initializer='zeros'))(channel_attention_feature)
-    return channel_attention
+    return channel_attention_feature
 
   
   
