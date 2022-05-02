@@ -1,4 +1,7 @@
 
+from tensorflow.keras.layers import Input, Reshape, Concatenate, Activation, RepeatVector, 
+from tensorflow.keras.layers import Multiply, Lambda, Permute, AveragePooling1D, GlobalMaxPooling1D, GlobalAveragePooling1D
+
 
 
 def feature_extraction(inputx, neurons_1, neurons_2):
