@@ -1,3 +1,29 @@
+
+
+from tensorflow.keras.layers import Input, Reshape, Concatenate, Activation, RepeatVector, 
+from tensorflow.keras.layers import Multiply, Lambda, Permute, AveragePooling1D, GlobalMaxPooling1D, GlobalAveragePooling1D
+
+
+
+def attention_layer2(out, inputx):
+  out = K.permute_dimensions(out, (0,1,3,2))
+  inputx = K.permute_dimensions(inputx, (0,1,3,2))
+  out_e = TimeDistributed(Dense(1, activation = 'tanh'))(out)
+  # the softmax taking the above op
+  e = TimeDistributed(Flatten())(out_e)
+  # for scaled dot product uncomment the following line
+  #e = Lamda(lambda values: values/K.sqrt(values.shape[-1]))
+  a = TimeDistributed(Activation('softmax'))(e)
+  temp = TimeDistributed(RepeatVector(1))(a*1.8)
+  temp = TimeDistributed(Permute([2,1]))(temp)
+  # multiply the weights with reshaped output of block 3
+  output = (Multiply())([inputx, temp])
+  # the attention adjusted output state
+  output = TimeDistributed(Lambda(lambda values: K.sum(values, axis = 1)))(output)
+  # expands the dimesnions across 2nd dimension of the feature map
+  output = tensorflow.expand_dims(output, axis=2)
+  return output
+
 # define channel attention
 def channel_attention(inputx, neurons_2, n, ratio=8):
     channel_axis = -1
