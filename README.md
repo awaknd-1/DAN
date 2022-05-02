@@ -9,7 +9,7 @@ This repository contains the code for implementing DAN. For more details about t
 * Tensorflow 2
 * Keras
 
-![this is an image](https://github.com/awaknd-1/DAN)
+![this is an image](https://github.com/awaknd-1/DAN  dan.png)
 
 
 
