@@ -43,7 +43,7 @@ def define_model(trainX):
     model.compile(loss = 'binary_crossentropy', optimizer = optim, metrics = ['accuracy'])
     return model
     
-
+# trainX and trainy are input 4D matrices of dimenions [samples, time, frequency, channel]
 def model_fit(trainX, testX, trainy, testy, e, bs):
     model =  define_model(trainX)
     # fit the model on the datasets
