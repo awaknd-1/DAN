@@ -24,6 +24,9 @@ def attention_layer2(out, inputx):
   output = tensorflow.expand_dims(output, axis=2)
   return output
 
+
+
+
 # define channel attention
 def channel_attention(inputx, neurons_2, n, ratio=8):
     channel_axis = -1
