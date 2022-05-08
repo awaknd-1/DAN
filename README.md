@@ -7,7 +7,7 @@ Attention-Based Network for Classification and Electrode Selection of EEG signal
 
 This repository contains the layers and model proposed for implementing the DAN. For more details about the network and the study please see the [paper](https://ieeexplore.ieee.org/document/9746241).
 
-## Code prerequisites
+## Code Prerequisites
 * Python 3.6 and above
 * Tensorflow 2
 * Keras
