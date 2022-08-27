@@ -6,28 +6,32 @@ def define_model(trainX):
     _,a,b,c = trainX.shape
     inputs1 = Input(shape=(a,b,c))
     # Block-1
+    # use the multi-head attention on the input.
     out1 = DAN(beta=1.8).MHDAN(inputs1,b,c, 15, 3)
     out = TimeDistributed(BatchNormalization(center = True, scale = True))(out1)
     out = Add()([inputs1, out])
     out = Activation('relu')(out)
-    # maxpool
+    # Block-2
+    # extrating the features
     out = DAN(beta=1.8).feature_extraction(out,128,128)
     out1 = TimeDistributed(BatchNormalization(center = True, scale = True))(out)
     out = Add()([out, out1])
     out = Activation('relu')(out)
-    # Block-2
+    # Block-3
     out = DAN(beta=1.8).feature_extraction(out,50,50)
     out1 = TimeDistributed(BatchNormalization(center = True, scale = True))(out)
     out = Add()([out, out1])
     out = Activation('relu')(out)
-    # block-3
+    # time distributed FC
     out = TimeDistributed(Flatten())(out)
     out = TimeDistributed(Dense(256,activation = 'relu'))(out)
+    # temporal Attention
     output = DAN(beta=1).temporal_attention(out)
+    # fully-connected layers
     output = Flatten()(output)
     output = (Dense(128,activation = 'relu'))(output)
-    # network-2
     outputs = (Dense(64, activation = 'relu'))(output)
+    # make predictions
     outputs = (Dense(2, activation = 'sigmoid'))(outputs)
     model = Model(inputs = inputs1, outputs = outputs)
     # compile
