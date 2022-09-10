@@ -1,7 +1,8 @@
 from Multi-Head-Attention import DAN
-from tensorflow.keras.layers import TimeDistributed, BatchNormalization, Activation, Dense, Flatten, Add, Input
-from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.layers import (Activation, Add, BatchNormalization,
+                                     Dense, Flatten, Input, TimeDistributed)
 from tensorflow.keras.models import Model
+from tensorflow.keras.optimizers import Adam
 
 
 class DANet():
@@ -43,4 +44,3 @@ class DANet():
       optim = Adam(lr)
       model.compile(loss = 'binary_crossentropy', optimizer = optim, metrics = ['accuracy'])
       return model
-
